@@ -1,6 +1,7 @@
 import 'package:evently_task/core/resources/routes_manager.dart';
 import 'package:evently_task/model/theme/AppTheme.dart';
 import 'package:evently_task/provider/theme_provider.dart';
+import 'package:evently_task/ui/login/screen/login_screen.dart';
 import 'package:evently_task/ui/sign_up/sign_up_screen.dart';
 import 'package:evently_task/ui/start_screen/start_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,9 @@ class MyApp extends StatelessWidget {
       routes: {
         RoutesManager.start: (context) => StartScreen(),
         RoutesManager.signup: (context) => SignUpScreen(),
+        RoutesManager.login: (context) => Login(),
       },
-      initialRoute: RoutesManager.start,
+      initialRoute: RoutesManager.signup,
     );
   }
 }

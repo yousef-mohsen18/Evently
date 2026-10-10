@@ -41,4 +41,5 @@ abstract final class AssetsManager {
   static const String heart_selected = "assets/images/heart_selected.svg";
   static const String search = "assets/images/search.svg";
   static const String route = "assets/images/route.png";
+  static const String google = "assets/images/googleIcon.png";
 }
