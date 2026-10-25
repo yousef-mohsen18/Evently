@@ -8,22 +8,22 @@ class ElevateContainer extends StatelessWidget {
     super.key,
     required this.title,
     required this.languageCode,
-     required this.selectedLanguage
+     required this.selectedLanguage,
+     required this.onClicked,
   });
 
   final String title;
   final String languageCode;
   final String selectedLanguage;
 
+   Function()onClicked;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 8),
       child: ElevatedButton(
-        onPressed: () {
-
-        },
+        onPressed: onClicked,
         style: ElevatedButton.styleFrom(
           backgroundColor: (languageCode==selectedLanguage)
               ? Theme.of(context).colorScheme.primary

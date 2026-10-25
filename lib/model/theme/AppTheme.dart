@@ -12,6 +12,12 @@ class AppTheme {
       onPrimary: ColorsManager.lightPrimary,
       onPrimaryContainer: ColorsManager.whiteColor,
       tertiary: ColorsManager.lightFieldBorderColor,
+      inversePrimary: Colors.white,
+      primaryContainer:ColorsManager.lightBackground,
+      onSecondary: ColorsManager.borderSideLight,
+      onPrimaryFixed:ColorsManager.whiteColor,
+      onPrimaryFixedVariant: ColorsManager.unSelectedNavigation,
+
     ),
     scaffoldBackgroundColor: ColorsManager.lightBackground,
     appBarTheme: AppBarThemeData(
@@ -49,6 +55,16 @@ class AppTheme {
         fontSize: 14,
         color: ColorsManager.lightSecondaryColor,
       ),
+      bodyMedium: TextStyle(
+        color: ColorsManager.blackColor,
+        fontSize: 16,
+        fontWeight: .w500
+      ),
+      titleLarge: TextStyle(
+        color: ColorsManager.lightPrimary,
+        fontSize: 14,
+        fontWeight: .w400
+      )
     ),
   );
 
@@ -59,6 +75,12 @@ class AppTheme {
       onPrimary: ColorsManager.whiteColor,
       onPrimaryContainer: Color(0xff001440),
       tertiary: ColorsManager.darkFieldBorderColor,
+      inversePrimary: ColorsManager.darkBackground,
+      primaryContainer:ColorsManager.darkBackground,
+      onSecondary: ColorsManager.borderSideDark,
+      onPrimaryFixed:ColorsManager.darkUnselectedSettings,
+      onPrimaryFixedVariant: ColorsManager.lightBackground,
+
     ),
     appBarTheme: AppBarThemeData(
       centerTitle: true,
@@ -95,6 +117,17 @@ class AppTheme {
         fontSize: 14,
         color: ColorsManager.darkSecondaryColor,
       ),
+        bodyMedium: TextStyle(
+            color: ColorsManager.whiteColor,
+            fontSize: 16,
+            fontWeight: .w500
+        ),
+        titleLarge: TextStyle(
+            color: ColorsManager.darkPrimary,
+            fontSize: 14,
+            fontWeight: .w400
+        )
+
     ),
   );
 }

@@ -1,7 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:evently_task/core/resources/assets_manager.dart';
-import 'package:evently_task/core/resources/colors_manager.dart';
 import 'package:evently_task/core/resources/routes_manager.dart';
-import 'package:evently_task/core/resources/strings_manager.dart';
 import 'package:evently_task/core/resuble_components/custom_button.dart';
 import 'package:evently_task/ui/start_screen/widgets/elevate_container.dart';
 import 'package:evently_task/ui/start_screen/widgets/theme_switch.dart';
@@ -24,7 +23,8 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     ThemeProvider provider = Provider.of<ThemeProvider>(context);
 
-    final String nameChecked = "en";
+    late String nameChecked;
+
     double sizeWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -46,40 +46,47 @@ class _StartScreenState extends State<StartScreen> {
               AssetsManager.beingCreative,
               color: Theme.of(context).colorScheme.onPrimary,
             ),
-            SizedBox(height: 24),
+            SizedBox(height: 10),
             Text(
-              StringsManager.startTitle,
+              "startTitle".tr(),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Text(
-              StringsManager.startDesc,
+              "startDesc".tr(),
               style: Theme.of(context).textTheme.titleSmall,
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 10),
             Row(
               children: [
                 Text(
-                  "${StringsManager.language}",
+                  "language".tr(),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Spacer(),
                 ElevateContainer(
                   title: "English",
                   languageCode: "en",
-                  selectedLanguage: nameChecked,
+                  selectedLanguage: context.locale.languageCode,
+                  onClicked: (){
+                   context.setLocale(Locale("en"));
+                  },
                 ),
+
                 ElevateContainer(
                   title: "Arabic",
                   languageCode: "ar",
-                  selectedLanguage: nameChecked,
+                  selectedLanguage: context.locale.languageCode,
+                  onClicked: () {
+                     context.setLocale(Locale("ar"));
+                  },
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 10),
             Row(
               children: [
                 Text(
-                  StringsManager.theme,
+                  "theme".tr(),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Spacer(),
@@ -98,10 +105,17 @@ class _StartScreenState extends State<StartScreen> {
               ],
             ),
             Spacer(),
-               Padding(
-                padding: const EdgeInsets.only(bottom:28 ),
-                child: CustomButton(title: StringsManager.startActionTitle, onClick: () { Navigator.of(context).pushReplacementNamed(RoutesManager.signup); },),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: CustomButton(
+                title: "startActionTitle".tr(),
+                onClick: () {
+                  Navigator.of(
+                    context,
+                  ).pushReplacementNamed(RoutesManager.onBoarding);
+                },
               ),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 abstract final class ColorsManager {
   static const Color lightBackground = Color(0xffF4F7FF);
   static const Color darkBackground = Color(0xff000F30);
@@ -13,4 +15,8 @@ abstract final class ColorsManager {
   static const Color lightFieldBorderColor = Color(0xffF0F0F0);
   static const Color darkFieldBorderColor = Color(0xff002D8F);
   static const Color lightDivider = Color(0xffF0F0F0);
+  static const Color unSelectedNavigation = Color(0xffB9B9B9);
+  static const Color borderSideLight = Color(0xffF0F0F0);
+  static const Color borderSideDark = Color(0xff002D8F);
+
 }

@@ -1,10 +1,19 @@
+import 'package:evently_task/core/remote/Network/auth_service.dart';
+import 'package:evently_task/core/remote/Network/fire_store_manager.dart';
 import 'package:evently_task/core/resources/assets_manager.dart';
+import 'package:evently_task/core/resources/dialog_utils.dart';
 import 'package:evently_task/core/resources/routes_manager.dart';
 import 'package:evently_task/core/resources/strings_manager.dart';
 import 'package:evently_task/core/resuble_components/custom_button.dart';
 import 'package:evently_task/core/resuble_components/custom_container_sign.dart';
 import 'package:evently_task/core/resuble_components/custom_text_filled.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:evently_task/model/fire_store/User.dart'as user;
+
+
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -37,7 +46,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  bool secure = true;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -130,7 +138,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 CustomButton(
                   title: "Sign Up",
                   onClick: () {
-                    if (formKey.currentState!.validate()) {}
+                    if (formKey.currentState!.validate()) {
+                      CreatNewAcc();
+                    }
                   },
                 ),
                 SizedBox(height: 24),
@@ -195,14 +205,60 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
                 SizedBox(height: 24),
-                CustomContainerSign(title: "Sign up With Google",)
+                CustomContainerSign(
+                  title: "Sign up With Google",
+                  OnClick: ()async {
+                    print("yousef");
+                    var result=await AuthService().signInWithGoogle();
+                    if(result==null){
 
+                      print("error11");
+                      return null;
+                    }
 
+                    print(result.user?.email);
+                  },
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  CreatNewAcc() async {
+    try {
+
+      DialogUtils.showLoadingDialog(context);
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passController.text,
+          );
+     await FireStoreManager.saveUser(user.User(
+        email: emailController.text,
+        name: nameController.text,
+        id: credential.user?.uid,
+        favorites: []
+      ));
+      Navigator.of(context).pop();
+      Navigator.of(context).pushReplacementNamed(RoutesManager.homeScreen);
+    } on FirebaseAuthException catch (e) {
+      Navigator.of(context).pop();
+      if (e.code == 'weak-password') {
+        DialogUtils.showMessageDialog(
+          content: 'The password provided is too weak.',
+          context: context,
+        );
+      } else if (e.code == 'email-already-in-use') {
+        DialogUtils.showMessageDialog(
+          content: 'The account already exists for that email.',
+          context: context,
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

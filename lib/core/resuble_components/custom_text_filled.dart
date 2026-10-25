@@ -27,7 +27,7 @@ class CustomTextFilled extends StatefulWidget {
 }
 
 class _CustomTextFilledState extends State<CustomTextFilled> {
-  bool visibleOff = false;
+  bool visibleOff = true;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +81,10 @@ class _CustomTextFilledState extends State<CustomTextFilled> {
       ),
       keyboardType: widget.keyboardType,
       obscureText: widget.isPassword? visibleOff:false,
+      onTapOutside: (event) {
+        Duration(milliseconds: 2);
+        FocusScope.of(context).unfocus();
+      },
 
     );
   }
